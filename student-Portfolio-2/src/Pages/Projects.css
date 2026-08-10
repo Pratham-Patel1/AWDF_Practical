@@ -1,0 +1,64 @@
+/* ============================================================
+   Projects.css — Projects Page Styles
+   ============================================================ */
+
+/* ── Page Wrapper ────────────────────────────────────────── */
+.projects-page {
+  padding-top: var(--navbar-height);
+  min-height: 100vh;
+}
+
+/* ── Header Section ──────────────────────────────────────── */
+.projects-page__header {
+  padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(37,99,235,0.14), transparent);
+  text-align: center;
+}
+
+.projects-page__header-inner {
+  max-width: 600px;
+}
+
+.projects-page__eyebrow {
+  font-size: var(--fs-sm);
+  color: var(--color-primary-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.projects-page__title {
+  font-size: var(--fs-5xl);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--spacing-md);
+}
+
+.projects-page__subtitle {
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ── Projects Grid ───────────────────────────────────────── */
+.projects-page__grid-section {
+  background: var(--color-bg-2);
+}
+
+.projects-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .projects-page__title { font-size: var(--fs-4xl); }
+  .projects-page__grid  { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .projects-page__title { font-size: var(--fs-3xl); }
+}

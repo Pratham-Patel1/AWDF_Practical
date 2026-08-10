@@ -1,0 +1,238 @@
+/* ============================================================
+   Navbar.css — Navbar Component Styles
+   ============================================================ */
+
+/* ── Base Navbar ─────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--navbar-height);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid transparent;
+  transition: var(--transition-base);
+}
+
+/* Scrolled state — more opaque with border */
+.navbar--scrolled {
+  background: rgba(15, 23, 42, 0.92);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode adjustments */
+.light-mode .navbar {
+  background: rgba(240, 244, 255, 0.7);
+}
+.light-mode .navbar--scrolled {
+  background: rgba(240, 244, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+}
+
+/* ── Container ───────────────────────────────────────────── */
+.navbar__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+}
+
+/* ── Brand Logo ──────────────────────────────────────────── */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  transition: var(--transition-base);
+}
+
+.navbar__brand:hover {
+  opacity: 0.85;
+}
+
+.navbar__brand-icon {
+  font-size: 1.4rem;
+}
+
+.navbar__brand-text {
+  letter-spacing: -0.02em;
+}
+
+.navbar__brand-accent {
+  color: var(--color-primary-light);
+}
+
+/* ── Navigation Links ────────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  list-style: none;
+}
+
+.navbar__item {
+  position: relative;
+}
+
+/* Nav link base style */
+.navbar__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent));
+  border-radius: var(--radius-full);
+  transition: width 0.25s ease;
+}
+
+.navbar__link:hover {
+  color: var(--color-text);
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.navbar__link:hover::after {
+  width: 60%;
+}
+
+/* Active route styling */
+.navbar__link--active {
+  color: var(--color-primary-light) !important;
+  background: rgba(37, 99, 235, 0.12);
+  font-weight: 600;
+}
+
+.navbar__link--active::after {
+  width: 60%;
+}
+
+/* ── Controls ────────────────────────────────────────────── */
+.navbar__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Dark mode toggle button */
+.navbar__theme-btn {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-base);
+  color: var(--color-text);
+}
+
+.navbar__theme-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.08);
+}
+
+/* ── Hamburger Button ────────────────────────────────────── */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.navbar__bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: var(--radius-full);
+  transition: var(--transition-base);
+}
+
+/* Hamburger open state (X icon) */
+.navbar__hamburger--open .navbar__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar__hamburger--open .navbar__bar:nth-child(2) {
+  opacity: 0;
+}
+.navbar__hamburger--open .navbar__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Responsive — Tablet & Mobile ───────────────────────── */
+@media (max-width: 768px) {
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__links {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md);
+    gap: var(--spacing-xs);
+    /* Hidden by default */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease;
+    padding: 0 var(--spacing-md);
+  }
+
+  .navbar__links--open {
+    max-height: 300px;
+    opacity: 1;
+    padding: var(--spacing-md);
+  }
+
+  .navbar__link {
+    padding: 0.75rem 1rem;
+    font-size: var(--fs-base);
+  }
+
+  .navbar__container {
+    padding: 0 var(--spacing-lg);
+  }
+}
